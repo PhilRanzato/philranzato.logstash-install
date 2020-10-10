@@ -1,0 +1,38 @@
+---
+# yum install -y java-1.8.0-openjdk
+# rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+# cat << EOF > /etc/yum.repos.d/logstash.repo
+# [logstash-7.x]
+# name=Elastic repository for 7.x packages
+# baseurl=https://artifacts.elastic.co/packages/7.x/yum
+# gpgcheck=1
+# gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+# enabled=1
+# autorefresh=1
+# type=rpm-md
+# EOF
+# yum install -y logstash
+# systemctl enable logstash
+# systemctl start logstash
+
+- name: "Install Java OpenJDK (Logstash dependency)"
+  yum:
+    name: java-1.8.0-openjdk
+    state: latest
+
+- name: "Import elasticsearch GPG key"
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: "Configure Logstash repository"
+  copy:
+    src: "logstash.repo"
+    dest: "/etc/yum.repos.d/logstash.repo"
+
+- name: "Install Logstash"
+  yum:
+    name: logstash
+    enable_repo: logstash
+    state: latest
+  notify: "Start Logstash"
