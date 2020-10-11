@@ -33,6 +33,5 @@
 - name: "Install Logstash"
   yum:
     name: logstash
-    enablerepo: logstash
     state: latest
   notify: "Start Logstash"
