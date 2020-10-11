@@ -15,10 +15,10 @@
 # systemctl enable logstash
 # systemctl start logstash
 
-# - name: "Install Java OpenJDK (Logstash dependency)"
-#   yum:
-#     name: java-1.8.0-openjdk
-#     state: latest
+- name: "Install Java OpenJDK (Logstash dependency)"
+  yum:
+    name: java-1.8.0-openjdk
+    state: latest
 
 - name: "Import elasticsearch GPG key"
   rpm_key:
@@ -34,4 +34,8 @@
   yum:
     name: logstash
     state: latest
+
+# sudo /usr/share/logstash/bin/system-install /etc/logstash/startup.options systemd
+- name: "Configure Logstash Service"
+  shell: /usr/share/logstash/bin/system-install /etc/logstash/startup.options systemd
   notify: "Start Logstash"
