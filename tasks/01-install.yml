@@ -15,10 +15,10 @@
 # systemctl enable logstash
 # systemctl start logstash
 
-- name: "Install Java OpenJDK (Logstash dependency)"
-  yum:
-    name: java-1.8.0-openjdk
-    state: latest
+# - name: "Install Java OpenJDK (Logstash dependency)"
+#   yum:
+#     name: java-1.8.0-openjdk
+#     state: latest
 
 - name: "Import elasticsearch GPG key"
   rpm_key:

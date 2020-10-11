@@ -5,5 +5,5 @@
 - name: "Install Logstash"
   include_tasks: "01-install.yml"
 
-- name: "Configure Logstash"
-  include_tasks: "02-configure.yml"
+# - name: "Configure Logstash"
+#   include_tasks: "02-configure.yml"
