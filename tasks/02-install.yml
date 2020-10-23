@@ -1,0 +1,23 @@
+---
+- name: "Import elasticsearch GPG key"
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  become: true
+
+- name: "Configure Logstash repository"
+  copy:
+    src: "logstash.repo"
+    dest: "/etc/yum.repos.d/logstash.repo"
+  become: true
+
+- name: "Install Logstash"
+  yum:
+    name: logstash
+    state: latest
+  become: true
+
+- name: "Configure Logstash Service"
+  shell: /usr/share/logstash/bin/system-install /etc/logstash/startup.options systemd
+  notify: "Start Logstash"
+  become: true

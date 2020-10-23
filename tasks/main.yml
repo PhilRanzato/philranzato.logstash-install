@@ -2,8 +2,8 @@
 - name: "Preflight Checks"
   include_tasks: "00-preflight-checks.yml"
 
-- name: "Install Logstash"
-  include_tasks: "01-install.yml"
+- name: "Install java"
+  include_tasks: "01-install-java.yml"
 
-# - name: "Configure Logstash"
-#   include_tasks: "02-configure.yml"
+- name: "Install Logstash"
+  include_tasks: "02-install.yml"
