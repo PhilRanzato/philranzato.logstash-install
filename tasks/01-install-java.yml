@@ -1,0 +1,6 @@
+---
+- name: "Install Java OpenJDK (Logstash dependency)"
+  yum:
+    name: java-1.8.0-openjdk
+    state: latest
+  become: true
